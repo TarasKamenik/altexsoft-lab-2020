@@ -12,7 +12,6 @@ namespace task1
     {
         public string FileData;
 
-
         public FileProcessor(string filePath)
         {
             
@@ -25,7 +24,6 @@ namespace task1
             {
                 Console.WriteLine("Файл не найден");
             }
-            
         }
         
         public void DeleteSymbol()
