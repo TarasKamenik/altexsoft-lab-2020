@@ -47,13 +47,17 @@ namespace task1
                 }
 
 
-                 FileProcessor fileProcessor = new FileProcessor(TextFileName);
-                 if (useDeleteSymbol) 
-                     fileProcessor.DeleteSymbol();
-                 if (useWordsCountAndEvery10)
-                     fileProcessor.WordsCountAndEvery10();
-                 if (useThirdSentence)
-                     fileProcessor.ThirdSentence();
+                DelSymbol delSymbol = new DelSymbol(TextFileName);
+                if (useDeleteSymbol)
+                    delSymbol.DeleteSymbol();
+
+                WordsCount wordsCount = new WordsCount(TextFileName);
+                if (useWordsCountAndEvery10)
+                    wordsCount.WordsCountAndEvery10();
+
+                Sentence sentence = new Sentence(TextFileName);
+                if (useThirdSentence)
+                    sentence.ThirdSentence();
 
                  DerectoriesProcessor derectories = new DerectoriesProcessor();
                  if (useDirectories)
