@@ -11,7 +11,12 @@ namespace task1
 {
     class DelSymbol : FileProcessor
     {
-        public DelSymbol(string filePath) : base(filePath) { }
+        private string _filePath;
+        public DelSymbol(string filePath) : base(filePath) 
+        {
+            _filePath = filePath;
+        }
+
         public void DeleteSymbol()
         {
             Console.WriteLine($"Введите символ\\слово:");
@@ -23,7 +28,7 @@ namespace task1
             else
                 Console.WriteLine($"Ошибка - в тексте нет указаного символа\\слова {symbol}");
 
-            File.WriteAllText("Text1.txt", fileDataWithDeletedSymbol);
+            File.WriteAllText(_filePath, fileDataWithDeletedSymbol);
             Console.WriteLine(fileDataWithDeletedSymbol);
         }
     }

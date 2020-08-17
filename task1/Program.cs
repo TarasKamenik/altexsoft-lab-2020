@@ -9,9 +9,17 @@ namespace task1
 {
     public class Program
     {
-        static string TextFileName = @"Text1.txt";
+        
         public static void Main(string[] args)
         {
+            Console.WriteLine("ВВедите имя файла:");
+
+            string path1 = Console.ReadLine();
+            string ext = ".txt";
+            string TextFileName = path1 + ext;
+            string TextFileNameCopy = path1 + "_copy" + ext;
+            File.Copy(TextFileName, TextFileNameCopy, true);
+
             try
             {
                 
@@ -47,21 +55,34 @@ namespace task1
                 }
 
 
-                DelSymbol delSymbol = new DelSymbol(TextFileName);
-                if (useDeleteSymbol)
+                
+                if (useDeleteSymbol) 
+                {
+                    DelSymbol delSymbol = new DelSymbol(TextFileName);
                     delSymbol.DeleteSymbol();
+                }
+                    
 
-                WordsCount wordsCount = new WordsCount(TextFileName);
-                if (useWordsCountAndEvery10)
+                if (useWordsCountAndEvery10) 
+                {
+                    WordsCount wordsCount = new WordsCount(TextFileName);
                     wordsCount.WordsCountAndEvery10();
+                }
+                    
 
-                Sentence sentence = new Sentence(TextFileName);
-                if (useThirdSentence)
+                if (useThirdSentence) 
+                {
+                    Sentence sentence = new Sentence(TextFileName);
                     sentence.ThirdSentence();
+                }
+                    
 
-                 DerectoriesProcessor derectories = new DerectoriesProcessor();
-                 if (useDirectories)
-                     derectories.Directories();
+                if (useDirectories) 
+                {
+                    DerectoriesProcessor derectories = new DerectoriesProcessor();
+                    derectories.Directories();
+                }
+                     
                                      
             }
             catch (IOException e)
