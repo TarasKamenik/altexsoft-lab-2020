@@ -8,24 +8,20 @@ using System.Text.RegularExpressions;
 
 namespace task1
 {
-    public class FileProcessor
-    {
-        protected string FileData { get; }
+	public abstract class FileProcessor
+	{
+		protected string FileData { get; }
 
-        public FileProcessor(string filePath)
-        {
-            
-            if (File.Exists(filePath))
-            {
-                FileData = File.ReadAllText(filePath);
-            }
-            else
-            {
-                Console.WriteLine("Файл не найден");
-            }
-        }
-        
-    }
-        
-
+		protected FileProcessor(string filePath)
+		{
+			if (File.Exists(filePath))
+			{
+				FileData = File.ReadAllText(filePath);
+			}
+			else
+			{
+				Console.WriteLine("Файл не найден");
+			}
+		}
+	}
 }
