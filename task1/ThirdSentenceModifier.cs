@@ -8,10 +8,10 @@ using System.Text.RegularExpressions;
 
 namespace task1
 {
-	class Sentence : FileProcessor
+	class ThirdSentenceModifier : FileProcessor
 	{
-		public Sentence(string filePath) : base(filePath) { }
-		public void ThirdSentence()
+		public ThirdSentenceModifier(string filePath) : base(filePath) { }
+		public void ModifyThirdSentence()
 		{
 			string[] sentences = Regex.Split(FileData, @"[.!?]", RegexOptions.CultureInvariant);
 			if (sentences.Length >= 2)
@@ -24,7 +24,7 @@ namespace task1
 				Console.WriteLine($"Ошибка - нет 3го предложения");
 			}
 		}
-		public string Reverse(string s)
+		private static string Reverse(string s)
 		{
 			char[] charArray = s.ToCharArray();
 			Array.Reverse(charArray);

@@ -11,12 +11,10 @@ namespace task1
 	{
 		public static void Main(string[] args)
 		{
-			Console.WriteLine("Введите имя файла:");
+			Console.WriteLine("Введите имя файла вместе с расширением:");
 
-			string path1 = Console.ReadLine();
-			string ext = ".txt";
-			string textFileName = path1 + ext;
-
+			string textFileName = Console.ReadLine();
+			
 			try
 			{
 				var useDeleteSymbol = false;
@@ -33,45 +31,45 @@ namespace task1
 				}
 				else
 				{
-					Console.WriteLine($"Исполнять метод DeleteSymbol? (Y/n)");
-					useDeleteSymbol = Console.ReadKey().KeyChar == 'Y';
+					Console.WriteLine($"Исполнять удаление символа? (Y/n)");
+					useDeleteSymbol = Console.ReadKey().Key == ConsoleKey.Y;
 					Console.WriteLine();
 
-					Console.WriteLine($"Исполнять метод WordsCountAndEvery10? (Y/n)");
-					useWordsCountAndEvery10 = Console.ReadKey().KeyChar == 'Y';
+					Console.WriteLine($"Выводить каждое десятое слово? (Y/n)");
+					useWordsCountAndEvery10 = Console.ReadKey().Key == ConsoleKey.Y;
 					Console.WriteLine();
 
-					Console.WriteLine($"Исполнять метод ThirdSentence? (Y/n)");
-					useThirdSentence = Console.ReadKey().KeyChar == 'Y';
+					Console.WriteLine($"Выводить третье предложение? (Y/n)");
+					useThirdSentence = Console.ReadKey().Key == ConsoleKey.Y;
 					Console.WriteLine();
 
-					Console.WriteLine($"Исполнять метод Directories? (Y/n)");
-					useDirectories = Console.ReadKey().KeyChar == 'Y';
+					Console.WriteLine($"Выводить содержимое папки? (Y/n)");
+					useDirectories = Console.ReadKey().Key == ConsoleKey.Y;
 					Console.WriteLine();
 				}
 
 				if (useDeleteSymbol)
 				{
-					DelSymbol delSymbol = new DelSymbol(textFileName);
-					delSymbol.DeleteSymbol();
+					SymbolRemover symbolRemover = new SymbolRemover(textFileName);
+					symbolRemover.DeleteSymbol();
 				}
 
 				if (useWordsCountAndEvery10)
 				{
-					WordsCount wordsCount = new WordsCount(textFileName);
-					wordsCount.WordsCountAndEvery10();
+					WordsCounter wordsCounter = new WordsCounter(textFileName);
+					wordsCounter.CountWordsAndShowEvery10();
 				}
 
 				if (useThirdSentence)
 				{
-					Sentence sentence = new Sentence(textFileName);
-					sentence.ThirdSentence();
+					ThirdSentenceModifier thirdSentenceModifier = new ThirdSentenceModifier(textFileName);
+					thirdSentenceModifier.ModifyThirdSentence();
 				}
 
 				if (useDirectories)
 				{
-					DerectoriesProcessor derectories = new DerectoriesProcessor();
-					derectories.Directories();
+					DirectoriesProcessor directoriesProcessor = new DirectoriesProcessor();
+					directoriesProcessor.RunDirectoriesLogic();
 				}
 			}
 			catch (IOException e)

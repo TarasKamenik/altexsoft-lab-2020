@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace task1
 {
-	public class DerectoriesProcessor
+	public class DirectoriesProcessor
 	{
-		public void Directories()
+		public void RunDirectoriesLogic()
 		{
 			Console.WriteLine($"Введите путь:");
 			string folderPath = Console.ReadLine();

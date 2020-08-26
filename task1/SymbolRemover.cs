@@ -9,10 +9,10 @@ using System.Text.RegularExpressions;
 
 namespace task1
 {
-	class DelSymbol : FileProcessor
+	class SymbolRemover : FileProcessor
 	{
 		private string _filePath;
-		public DelSymbol(string filePath) : base(filePath)
+		public SymbolRemover(string filePath) : base(filePath)
 		{
 			_filePath = filePath;
 		}
@@ -28,7 +28,7 @@ namespace task1
 
 			if (FileData.Contains(symbol))
 			{
-				string ext = ".txt";
+				string ext = Path.GetExtension(_filePath); ;
 				string textFileNameCopy = Path.GetFileNameWithoutExtension(_filePath) + "_copy" + ext;
 				File.Copy(_filePath, textFileNameCopy, true);
 				var fileDataWithDeletedSymbol = FileData.Replace(symbol, "", true, CultureInfo.CurrentCulture);

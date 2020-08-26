@@ -8,10 +8,10 @@ using System.Text.RegularExpressions;
 
 namespace task1
 {
-	class WordsCount : FileProcessor
+	class WordsCounter : FileProcessor
 	{
-		public WordsCount(string filePath) : base(filePath) { }
-		public void WordsCountAndEvery10()
+		public WordsCounter(string filePath) : base(filePath) { }
+		public void CountWordsAndShowEvery10()
 		{
 			string[] words = Regex.Split(FileData, @"\s+", RegexOptions.IgnoreCase);
 			var wordsCount = words.Length;
