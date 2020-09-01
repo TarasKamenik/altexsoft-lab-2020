@@ -11,9 +11,9 @@ namespace task2.Controller
 	{
 		private readonly IRepository _repository;
 
-		public RecipeBookController()
+		public RecipeBookController(IRepository repository)
 		{
-			_repository = new JsonRepository(AppDomain.CurrentDomain.BaseDirectory, new InMemoryRepository());
+			_repository = repository;
 		}
 
 		public void RunRecipeBook()
