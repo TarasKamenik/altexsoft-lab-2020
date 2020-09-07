@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using task2.Controller;
+using task2.Data;
 using task2.Repository;
 
 namespace task2
@@ -11,7 +12,7 @@ namespace task2
 		{
 			Console.OutputEncoding = System.Text.Encoding.UTF8;
 
-			var recipeBook = new RecipeBookController(new JsonRepository(AppDomain.CurrentDomain.BaseDirectory, new InMemoryRepository()));
+			var recipeBook = new RecipeBookController(new UnitOfWork());
 			recipeBook.RunRecipeBook();
 
 			Console.ReadKey();

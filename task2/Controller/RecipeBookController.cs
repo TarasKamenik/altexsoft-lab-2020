@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using task2.Data;
 using task2.Models;
 using task2.Repository;
 
@@ -9,11 +10,11 @@ namespace task2.Controller
 {
 	public class RecipeBookController
 	{
-		private readonly IRepository _repository;
+		private readonly IUnitOfWork _unitOfWork;
 
-		public RecipeBookController(IRepository repository)
+		public RecipeBookController(IUnitOfWork unitOfWork)
 		{
-			_repository = repository;
+			_unitOfWork = unitOfWork;
 		}
 
 		public void RunRecipeBook()
@@ -71,7 +72,7 @@ namespace task2.Controller
 							var idStr = input.Substring(1, input.Length - 1);
 							if (int.TryParse(idStr, out int id))
 							{
-								var category = _repository.GetCategory(id);
+								var category = _unitOfWork.CategoryRepository.GetCategory(id);
 								if (category != null)
 								{
 									categoryIdStack.Push(category.Id);
@@ -88,7 +89,7 @@ namespace task2.Controller
 							var idStr = input.Substring(1, input.Length - 1);
 							if (int.TryParse(idStr, out int id))
 							{
-								var recipe = _repository.GetRecipe(id);
+								var recipe = _unitOfWork.RecipeRepository.SingleOrDefault(i => i.Id == id);
 								if (recipe != null)
 								{
 									Console.WriteLine(FormatRecipe(recipe));
@@ -128,7 +129,7 @@ namespace task2.Controller
 
 			if (categoryId == null)
 			{
-				var categories = _repository.GetAllCategories();
+				var categories = _unitOfWork.CategoryRepository.GetAll();
 				foreach (var category in categories)
 				{
 					Console.WriteLine($"C{category.Id} - Категория: {category.Name}");
@@ -136,12 +137,12 @@ namespace task2.Controller
 			}
 			else
 			{
-				var category = _repository.GetCategory(categoryId.Value);
+				var category = _unitOfWork.CategoryRepository.GetCategory(categoryId.Value);
 				foreach (var subCategory in category.SubCategories)
 				{
 					Console.WriteLine($"C{subCategory.Id} - Категория: {subCategory.Name}");
 				}
-				var recipes = _repository.GetRecipesForCategory(category.Id);
+				var recipes = _unitOfWork.RecipeRepository.GetRecipesForCategory(category.Id);
 				foreach (var recipe in recipes)
 				{
 					Console.WriteLine($"R{recipe.Id} - Рецепт: {recipe.Name}");
@@ -151,7 +152,7 @@ namespace task2.Controller
 
 		private void ShowIngridients()
 		{
-			var ingridients = _repository.GetAllIngredients();
+			var ingridients = _unitOfWork.IngredientRepository.GetAll();
 			foreach (var ingridient in ingridients)
 			{
 				Console.WriteLine($"{ingridient.Id} - {ingridient.Name}");
@@ -174,13 +175,14 @@ namespace task2.Controller
 			var ingredientNumbers = Console.ReadLine().Split(",");
 			var ingredients = ingredientNumbers
 				.Where(i => int.TryParse(i, out int intId))
-				.Select(i => _repository.GetIngredient(int.Parse(i)))
+				.Select(i => _unitOfWork.IngredientRepository.GetIngredient(int.Parse (i)))
 				.Where(i => i != null)
 				.ToList();
 			Console.WriteLine("Введите шаги приготовления в рецепте через точку с запятой (;): ");
 			var steps = Console.ReadLine().Split(";");
 			var newRecipe = new Recipe(-1, categoryId, name, description, ingredients, steps.ToList());
-			_repository.CreateRecipe(newRecipe);
+			_unitOfWork.RecipeRepository.Add(newRecipe);
+			_unitOfWork.RecipeRepository.Save();
 			Console.WriteLine("Новый рецепт добавлен!");
 		}
 	}

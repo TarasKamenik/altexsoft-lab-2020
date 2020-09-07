@@ -6,7 +6,7 @@ using task2.Models;
 
 namespace task2.Repository
 {
-	public class InMemoryRepository : IRepository
+	public class InMemoryService : IService
 	{
 		private static List<Ingredient> _ingredientList = new List<Ingredient>()
 		{

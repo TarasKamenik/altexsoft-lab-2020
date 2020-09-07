@@ -5,7 +5,7 @@ using task2.Models;
 
 namespace task2.Repository
 {
-	public interface IRepository
+	public interface IService
 	{
 		IList<Category> GetAllCategories();
 		Category GetCategory(int id);
