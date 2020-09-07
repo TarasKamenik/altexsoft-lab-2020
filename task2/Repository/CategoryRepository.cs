@@ -13,28 +13,28 @@ namespace task2.Repository
 			_filePath = fileName;
 		}
 
-		public Category GetCategory(int id)
+		public override Category SingleOrDefault(Func<Category, bool> predicate)
 		{
-			return SearchCategory(id, Items);
+			return SearchCategory(predicate, Items);
 		}
 
 		public override void Save()
 		{
-			throw new NotImplementedException();
+			
 		}
 
-		public Category SearchCategory(int id, IList<Category> Items)
+		private Category SearchCategory(Func<Category, bool> predicate, IList<Category> Items)
 		{
 			foreach (var category in Items)
 			{
-				if (category.Id == id)
+				if (predicate(category))
 				{
 					return category;
 				}
 				else if (category.SubCategories.Count > 0)
 				{
-					var result = SearchCategory(id, category.SubCategories);
-					if (result != null && result.Id == id)
+					var result = SearchCategory(predicate, category.SubCategories);
+					if (result != null && predicate(result))
 						return result;
 				}
 			}

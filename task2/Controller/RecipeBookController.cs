@@ -72,7 +72,7 @@ namespace task2.Controller
 							var idStr = input.Substring(1, input.Length - 1);
 							if (int.TryParse(idStr, out int id))
 							{
-								var category = _unitOfWork.CategoryRepository.GetCategory(id);
+								var category = _unitOfWork.CategoryRepository.SingleOrDefault(i => i.Id == id);
 								if (category != null)
 								{
 									categoryIdStack.Push(category.Id);
@@ -137,7 +137,7 @@ namespace task2.Controller
 			}
 			else
 			{
-				var category = _unitOfWork.CategoryRepository.GetCategory(categoryId.Value);
+				var category = _unitOfWork.CategoryRepository.SingleOrDefault(i => i.Id == categoryId);
 				foreach (var subCategory in category.SubCategories)
 				{
 					Console.WriteLine($"C{subCategory.Id} - Категория: {subCategory.Name}");
@@ -175,14 +175,14 @@ namespace task2.Controller
 			var ingredientNumbers = Console.ReadLine().Split(",");
 			var ingredients = ingredientNumbers
 				.Where(i => int.TryParse(i, out int intId))
-				.Select(i => _unitOfWork.IngredientRepository.GetIngredient(int.Parse (i)))
+				.Select(i => _unitOfWork.IngredientRepository.SingleOrDefault(n => n.Id == int.Parse(i)))
 				.Where(i => i != null)
 				.ToList();
 			Console.WriteLine("Введите шаги приготовления в рецепте через точку с запятой (;): ");
 			var steps = Console.ReadLine().Split(";");
 			var newRecipe = new Recipe(-1, categoryId, name, description, ingredients, steps.ToList());
 			_unitOfWork.RecipeRepository.Add(newRecipe);
-			_unitOfWork.RecipeRepository.Save();
+			_unitOfWork.Save();
 			Console.WriteLine("Новый рецепт добавлен!");
 		}
 	}

@@ -10,15 +10,15 @@ namespace task2.Data
 {
 	public class UnitOfWork : IUnitOfWork
 	{
-		public RecipeRepository RecipeRepository { get; set; }
-		public CategoryRepository CategoryRepository { get; set; }
-		public IngredientRepository IngredientRepository { get; set; }
+		public IRecipeRepository RecipeRepository { get; set; }
+		public ICategoryRepository CategoryRepository { get; set; }
+		public IIngredientRepository IngredientRepository { get; set; }
 
 		private static string _ingredientsFile = "ingredients.json";
 		private static string _recipesFile = "recipes.json";
 		private static string _categoriesFile = "categories.json";
 
-		public UnitOfWork() 
+		public UnitOfWork()
 		{
 			var storagePath = AppDomain.CurrentDomain.BaseDirectory;
 			var inMemoryService = new InMemoryService();
@@ -29,6 +29,13 @@ namespace task2.Data
 			RecipeRepository = new RecipeRepository(recipeList, _recipesFile);
 			CategoryRepository = new CategoryRepository(categoryList, _categoriesFile);
 			IngredientRepository = new IngredientRepository(ingredientList, _ingredientsFile);
+		}
+
+		public void Save() 
+		{
+			RecipeRepository.Save();
+			CategoryRepository.Save();
+			IngredientRepository.Save();
 		}
 		private List<T> ResolveEntitiesFile<T>(string path, IList<T> entities)
 		{

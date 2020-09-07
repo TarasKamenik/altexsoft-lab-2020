@@ -5,11 +5,8 @@ using task2.Models;
 
 namespace task2.Repository
 {
-	interface IIngredientRepository 
+	public interface IIngredientRepository : IGenericRepository<Ingredient>
 	{
-		Ingredient GetIngredient(int id);
+		
 	}
-	
-
-
 }

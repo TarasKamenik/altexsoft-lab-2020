@@ -7,8 +7,9 @@ namespace task2.Data
 {
 	public interface IUnitOfWork
 	{
-		RecipeRepository RecipeRepository { get; set; }
-		CategoryRepository CategoryRepository { get; set; }
-		IngredientRepository IngredientRepository { get; set; }
+		IRecipeRepository RecipeRepository { get; set; }
+		ICategoryRepository CategoryRepository { get; set; }
+		IIngredientRepository IngredientRepository { get; set; }
+		void Save();
 	}
 }

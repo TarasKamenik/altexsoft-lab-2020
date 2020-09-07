@@ -16,12 +16,7 @@ namespace task2.Repository
 
 		public override void Save()
 		{
-			throw new NotImplementedException();
-		}
-
-		public Ingredient GetIngredient(int id)
-		{
-			return Items.FirstOrDefault(i => i.Id == id);
+		
 		}
 	}
 }

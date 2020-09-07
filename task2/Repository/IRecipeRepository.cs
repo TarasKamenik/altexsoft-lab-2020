@@ -5,7 +5,7 @@ using task2.Models;
 
 namespace task2.Repository
 {
-	public interface IRecipeRepository
+	public interface IRecipeRepository : IGenericRepository<Recipe>
 	{
 		IList<Recipe> GetRecipesForCategory(int categoryId);
 	}

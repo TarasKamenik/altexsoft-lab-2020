@@ -5,7 +5,7 @@ using System.Xml.Linq;
 
 namespace task2.Repository
 {
-	interface IGenericRepository<T> where T : class
+	public interface IGenericRepository<T> where T : class
     {
         IEnumerable<T> GetAll();
         IEnumerable<T> Find(Func<T, bool> predicate);

@@ -5,8 +5,8 @@ using task2.Models;
 
 namespace task2.Repository
 {
-	interface ICategoryRepository
+	public interface ICategoryRepository : IGenericRepository<Category>
 	{
-		Category SearchCategory(int id, IList<Category> categories);
+		
 	}
 }
