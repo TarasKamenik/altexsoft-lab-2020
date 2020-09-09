@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
+using System.Text.Json;
 using task2.Models;
 
 namespace task2.Repository
@@ -20,7 +22,8 @@ namespace task2.Repository
 
 		public override void Save()
 		{
-			
+			var json = JsonSerializer.Serialize(Items);
+			File.WriteAllText(_filePath, json);
 		}
 
 		private Category SearchCategory(Func<Category, bool> predicate, IList<Category> Items)

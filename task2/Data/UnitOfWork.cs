@@ -31,7 +31,7 @@ namespace task2.Data
 			IngredientRepository = new IngredientRepository(ingredientList, _ingredientsFile);
 		}
 
-		public void Save() 
+		public void Save()
 		{
 			RecipeRepository.Save();
 			CategoryRepository.Save();
@@ -39,18 +39,22 @@ namespace task2.Data
 		}
 		private List<T> ResolveEntitiesFile<T>(string path, IList<T> entities)
 		{
-			if (!File.Exists(path) && entities != null)
-			{
-				var json = JsonSerializer.Serialize(entities);
-				File.WriteAllText(path, json);
-			}
-
+			InitDataIfNotExist(path, entities);
 			if (!File.Exists(path))
 			{
 				throw new Exception($"Нет файла {path}");
 			}
 
 			return JsonSerializer.Deserialize<List<T>>(File.ReadAllText(path));
+		}
+
+		private void InitDataIfNotExist<T>(string path, IList<T> entities)
+		{
+			if (!File.Exists(path) && entities != null)
+			{
+				var json = JsonSerializer.Serialize(entities);
+				File.WriteAllText(path, json);
+			}
 		}
 	}
 }
