@@ -9,21 +9,14 @@ namespace task2.Repository
 {
 	public class CategoryRepository : GenericRepository<Category>, ICategoryRepository
 	{
-		private string _filePath;
-		public CategoryRepository(IList<Category> items, string fileName) : base(items) 
+		public CategoryRepository(IList<Category> items, string fileName) : base(items, fileName) 
 		{
-			_filePath = fileName;
+			
 		}
 
 		public override Category SingleOrDefault(Func<Category, bool> predicate)
 		{
 			return SearchCategory(predicate, Items);
-		}
-
-		public override void Save()
-		{
-			var json = JsonSerializer.Serialize(Items);
-			File.WriteAllText(_filePath, json);
 		}
 
 		private Category SearchCategory(Func<Category, bool> predicate, IList<Category> Items)

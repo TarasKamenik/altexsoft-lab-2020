@@ -10,20 +10,13 @@ namespace task2.Repository
 {
 	public class RecipeRepository : GenericRepository<Recipe>, IRecipeRepository
 	{
-		private string _filePath;
-		public RecipeRepository(IList<Recipe> items, string fileName) : base(items) 
+		public RecipeRepository(IList<Recipe> items, string fileName) : base(items, fileName) 
 		{
-			_filePath = fileName;
+		
 		}
 		public IList<Recipe> GetRecipesForCategory(int categoryId)
 		{
 			return Items.Where(r => r.CategoryId == categoryId).ToList();
-		}
-
-		public override void Save()
-		{
-			var json = JsonSerializer.Serialize(Items);
-			File.WriteAllText(_filePath, json);
 		}
 
 		public override Recipe Add(Recipe item)

@@ -10,16 +10,9 @@ namespace task2.Repository
 {
 	public class IngredientRepository : GenericRepository<Ingredient>, IIngredientRepository
 	{
-		private string _filePath;
-		public IngredientRepository(IList<Ingredient> items, string fileName) : base(items)
+		public IngredientRepository(IList<Ingredient> items, string fileName) : base(items, fileName)
 		{
-			_filePath = fileName;
-		}
-
-		public override void Save()
-		{
-			var json = JsonSerializer.Serialize(Items);
-			File.WriteAllText(_filePath, json);
+			
 		}
 	}
 }
