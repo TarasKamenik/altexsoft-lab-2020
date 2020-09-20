@@ -13,22 +13,20 @@ namespace task2.Data
 		public IRecipeRepository RecipeRepository { get; set; }
 		public ICategoryRepository CategoryRepository { get; set; }
 		public IIngredientRepository IngredientRepository { get; set; }
-
-		private static string _ingredientsFile = "ingredients.json";
-		private static string _recipesFile = "recipes.json";
-		private static string _categoriesFile = "categories.json";
+		private readonly FileManager _fileManager;
 
 		public UnitOfWork()
 		{
 			var storagePath = AppDomain.CurrentDomain.BaseDirectory;
 			var inMemoryService = new InMemoryService();
-			var ingredientList = ResolveEntitiesFile(Path.Combine(storagePath, _ingredientsFile), inMemoryService?.GetAllIngredients());
-			var recipeList = ResolveEntitiesFile(Path.Combine(storagePath, _recipesFile), inMemoryService?.GetAllRecipes());
-			var categoryList = ResolveEntitiesFile(Path.Combine(storagePath, _categoriesFile), inMemoryService?.GetAllCategories());
+			_fileManager = new FileManager();
+			var ingredientList = _fileManager.ResolveEntitiesFile(Path.Combine(storagePath, _fileManager.IngredientsFile), inMemoryService?.GetAllIngredients());
+			var recipeList = _fileManager.ResolveEntitiesFile(Path.Combine(storagePath, _fileManager.RecipesFile), inMemoryService?.GetAllRecipes());
+			var categoryList = _fileManager.ResolveEntitiesFile(Path.Combine(storagePath, _fileManager.CategoriesFile), inMemoryService?.GetAllCategories());
 
-			RecipeRepository = new RecipeRepository(recipeList, _recipesFile);
-			CategoryRepository = new CategoryRepository(categoryList, _categoriesFile);
-			IngredientRepository = new IngredientRepository(ingredientList, _ingredientsFile);
+			RecipeRepository = new RecipeRepository(recipeList, _fileManager.IngredientsFile);
+			CategoryRepository = new CategoryRepository(categoryList, _fileManager.RecipesFile);
+			IngredientRepository = new IngredientRepository(ingredientList, _fileManager.CategoriesFile);
 		}
 
 		public void Save()
@@ -37,24 +35,6 @@ namespace task2.Data
 			CategoryRepository.Save();
 			IngredientRepository.Save();
 		}
-		private List<T> ResolveEntitiesFile<T>(string path, IList<T> entities)
-		{
-			InitDataIfNotExist(path, entities);
-			if (!File.Exists(path))
-			{
-				throw new Exception($"Нет файла {path}");
-			}
-
-			return JsonSerializer.Deserialize<List<T>>(File.ReadAllText(path));
-		}
-
-		private void InitDataIfNotExist<T>(string path, IList<T> entities)
-		{
-			if (!File.Exists(path) && entities != null)
-			{
-				var json = JsonSerializer.Serialize(entities);
-				File.WriteAllText(path, json);
-			}
-		}
+		
 	}
 }
