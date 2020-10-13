@@ -7,7 +7,31 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "task1", "task1\task1.csproj
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "task2", "task2\task2.csproj", "{2093D430-5ACC-4898-84B2-2934C9BA02ED}"
 EndProject
-Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "task3", "task3\task3.sqlproj", "{ED62A60E-B21F-4F85-8B81-C7C74FDCA607}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "task3", "task3", "{27AEF35A-4577-4DF3-9943-738C8C147D9E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "data", "data", "{9433F864-C410-4E34-93F4-4C1F90D180CA}"
+	ProjectSection(SolutionItems) = preProject
+		task3\data\Categories.sql = task3\data\Categories.sql
+		task3\data\Ingredients.sql = task3\data\Ingredients.sql
+		task3\data\RecipeIngredients.sql = task3\data\RecipeIngredients.sql
+		task3\data\Recipes.sql = task3\data\Recipes.sql
+		task3\data\RecipeSteps.sql = task3\data\RecipeSteps.sql
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "schema", "schema", "{23BC8129-3A58-4FBB-AEB1-88E1663ACA0D}"
+	ProjectSection(SolutionItems) = preProject
+		task3\schema\1-BookOfRecipesDB.sql = task3\schema\1-BookOfRecipesDB.sql
+		task3\schema\2-CategoriesTable.sql = task3\schema\2-CategoriesTable.sql
+		task3\schema\3-IngredientsTable.sql = task3\schema\3-IngredientsTable.sql
+		task3\schema\4-RecipeIngredientsTable.sql = task3\schema\4-RecipeIngredientsTable.sql
+		task3\schema\5-RecipesTable.sql = task3\schema\5-RecipesTable.sql
+		task3\schema\6-RecipeStepsTable.sql = task3\schema\6-RecipeStepsTable.sql
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "queries", "queries", "{56CC088C-EFC2-4C86-AE41-9832DF0AACE4}"
+	ProjectSection(SolutionItems) = preProject
+		task3\queries\CategoriesCTE.sql = task3\queries\CategoriesCTE.sql
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,15 +47,14 @@ Global
 		{2093D430-5ACC-4898-84B2-2934C9BA02ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2093D430-5ACC-4898-84B2-2934C9BA02ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2093D430-5ACC-4898-84B2-2934C9BA02ED}.Release|Any CPU.Build.0 = Release|Any CPU
-		{ED62A60E-B21F-4F85-8B81-C7C74FDCA607}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{ED62A60E-B21F-4F85-8B81-C7C74FDCA607}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{ED62A60E-B21F-4F85-8B81-C7C74FDCA607}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
-		{ED62A60E-B21F-4F85-8B81-C7C74FDCA607}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{ED62A60E-B21F-4F85-8B81-C7C74FDCA607}.Release|Any CPU.Build.0 = Release|Any CPU
-		{ED62A60E-B21F-4F85-8B81-C7C74FDCA607}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{9433F864-C410-4E34-93F4-4C1F90D180CA} = {27AEF35A-4577-4DF3-9943-738C8C147D9E}
+		{23BC8129-3A58-4FBB-AEB1-88E1663ACA0D} = {27AEF35A-4577-4DF3-9943-738C8C147D9E}
+		{56CC088C-EFC2-4C86-AE41-9832DF0AACE4} = {27AEF35A-4577-4DF3-9943-738C8C147D9E}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {B8023673-E010-43BF-811F-B6CFFE066AC6}

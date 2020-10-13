@@ -4,11 +4,11 @@ set @CategoryId = 3;
 with Categories_CTE(CategoryId, ParentCategoryId, CategoryName, CategoryPath)
 AS
 (
-	select c.Id, c.ParentCategoryId, c.Name, cast(c.Name as nvarchar(max)) + '\' as CategoryPath
+	select c.Id, c.ParentId, c.Name, cast(c.Name as nvarchar(max)) + '\' as CategoryPath
 	from Categories c
 	where c.Id = @CategoryId
 	union all
-	select c.Id, c.ParentCategoryId, c.Name, CategoryPath + cast(c.Name as nvarchar(max)) + '\'
+	select c.Id, c.ParentId, c.Name, CategoryPath + cast(c.Name as nvarchar(max)) + '\'
 	from Categories c
 	inner join Categories_CTE cc on cc.CategoryId = c.ParentCategoryId
 )
